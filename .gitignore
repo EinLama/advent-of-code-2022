@@ -9,3 +9,7 @@
 
 # rspec failure tracking
 .rspec_status
+
+
+# part1 and part2 of each task (they are too big)
+input/*_part*

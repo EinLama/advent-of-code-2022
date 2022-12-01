@@ -18,7 +18,7 @@ module Aoc2022
 end
 
 if __FILE__ == $PROGRAM_NAME
-  f = Aoc2022.read_input("1_example.txt")
+  f = Aoc2022.read_input("1_part1.txt")
   elf = Aoc2022::Day1.solve(f)
   puts elf.calories
 end
