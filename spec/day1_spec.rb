@@ -11,19 +11,9 @@ RSpec.describe Aoc2022::Day1 do
     end
 
     it "can start with calories" do
-      elf = Elf.new(calories: [10, 20])
+      elf = Elf.new(calories: 30)
 
       expect(elf.calories).to eq(30)
-    end
-
-    it "can pick up calories" do
-      elf = Elf.new
-
-      elf.pickup!(100)
-      expect(elf.calories).to eq(100)
-
-      elf.pickup!(3)
-      expect(elf.calories).to eq(103)
     end
 
     it "can be instantiated from a string" do
@@ -38,7 +28,7 @@ RSpec.describe Aoc2022::Day1 do
 
     it "can parse calories from lines" do
       elves = Elf.from_str("30")
-      expect(elves.size).to equal(1)
+      expect(elves.size).to eq(1)
       expect(elves.first.calories).to eq(30)
 
       elves = Elf.from_str("30\n20")

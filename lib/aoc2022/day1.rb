@@ -8,25 +8,21 @@ module Aoc2022
       def self.from_str(str)
         elves = []
 
-        elf = Elf.new
+        nums = 0
         str.split("\n").each do |line|
           if line.empty?
-            elves << elf
-            elf = Elf.new
+            elves << Elf.new(calories: nums)
+            nums = 0
           end
-          elf.pickup!(line.to_i)
+          nums += line.to_i
         end
-        elves << elf
+        elves << Elf.new(calories: nums)
 
         elves
       end
 
-      def initialize(calories: [])
-        @calories = calories.sum
-      end
-
-      def pickup!(calories)
-        @calories += calories
+      def initialize(calories: 0)
+        @calories = calories
       end
     end
 
