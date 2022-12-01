@@ -37,9 +37,17 @@ if __FILE__ == $PROGRAM_NAME
     end
   end.parse!
 
+  file_suffix = if options[:part] == "example"
+                  "_example.txt"
+                else
+                  ".txt"
+                end
+
+  options[:filename] = "#{options[:day]}#{file_suffix}"
+
   p options if options[:verbose]
 
-  input = Aoc2022.read_input("#{options[:day]}_#{options[:part]}.txt")
+  input = Aoc2022.read_input(options[:filename])
   clazz = Aoc2022.const_get("Day#{options[:day]}")
 
   puts clazz.public_send("solve_#{options[:part]}", input)
