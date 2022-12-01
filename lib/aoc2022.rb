@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "optparse"
+
 require_relative "aoc2022/version"
 require_relative "aoc2022/day1"
 
@@ -18,7 +20,27 @@ module Aoc2022
 end
 
 if __FILE__ == $PROGRAM_NAME
-  f = Aoc2022.read_input("1_part1.txt")
-  elf = Aoc2022::Day1.solve(f)
-  puts elf.calories
+  options = {}
+  OptionParser.new do |opts|
+    opts.on("-dDAY", "--day=DAY", "Choose day as integer.") do |d|
+      options[:day] = d
+    end
+
+    opts.on("-pPART", "--part=PART", "Choose a part (1, 2, [e]xample)") do |p|
+      p = "part#{p}" if %w[1 2].include?(p)
+      p = "example" if p == "e"
+      options[:part] = p
+    end
+
+    opts.on("-v", "--verbose", "Display parsed options") do |v|
+      options[:verbose] = v
+    end
+  end.parse!
+
+  p options if options[:verbose]
+
+  input = Aoc2022.read_input("#{options[:day]}_#{options[:part]}.txt")
+  clazz = Aoc2022.const_get("Day#{options[:day]}")
+
+  puts clazz.public_send("solve_#{options[:part]}", input)
 end

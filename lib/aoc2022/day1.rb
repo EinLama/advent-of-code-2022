@@ -28,10 +28,14 @@ module Aoc2022
 
     module_function
 
-    def solve(input)
+    def solve_example(input)
+      solve_part1(input)
+    end
+
+    def solve_part1(input)
       elves = Elf.from_str(input)
 
-      elves.max_by(&:calories)
+      elves.max_by(&:calories).calories
     end
   end
 end
