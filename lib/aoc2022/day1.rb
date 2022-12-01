@@ -35,7 +35,15 @@ module Aoc2022
     def solve_part1(input)
       elves = Elf.from_str(input)
 
+      # Top calory count:
       elves.max_by(&:calories).calories
+    end
+
+    def solve_part2(input)
+      elves = Elf.from_str(input)
+
+      # Sum of the top three calory counts:
+      elves.sort_by(&:calories).reverse.take(3).sum(&:calories)
     end
   end
 end
