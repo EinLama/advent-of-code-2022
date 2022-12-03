@@ -132,4 +132,50 @@ RSpec.describe Aoc2022::Day2 do
       expect(lines[1][1]).to eq(Scissors.new)
     end
   end
+
+  context "part 2" do
+    context "guessing response" do
+      it "makes you lose when it encounters X" do
+        them, ours = Aoc2022::Day2.from_line("A X", guess_response: true)
+        expect(them).to eq(Rock.new)
+        expect(ours).to eq(Scissors.new)
+
+        them, ours = Aoc2022::Day2.from_line("B X", guess_response: true)
+        expect(them).to eq(Paper.new)
+        expect(ours).to eq(Rock.new)
+
+        them, ours = Aoc2022::Day2.from_line("C X", guess_response: true)
+        expect(them).to eq(Scissors.new)
+        expect(ours).to eq(Paper.new)
+      end
+
+      it "makes you draw when it encounters Y" do
+        them, ours = Aoc2022::Day2.from_line("A Y", guess_response: true)
+        expect(them).to eq(Rock.new)
+        expect(ours).to eq(Rock.new)
+
+        them, ours = Aoc2022::Day2.from_line("B Y", guess_response: true)
+        expect(them).to eq(Paper.new)
+        expect(ours).to eq(Paper.new)
+
+        them, ours = Aoc2022::Day2.from_line("C Y", guess_response: true)
+        expect(them).to eq(Scissors.new)
+        expect(ours).to eq(Scissors.new)
+      end
+
+      it "makes you win when it encounters Z" do
+        them, ours = Aoc2022::Day2.from_line("A Z", guess_response: true)
+        expect(them).to eq(Rock.new)
+        expect(ours).to eq(Paper.new)
+
+        them, ours = Aoc2022::Day2.from_line("B Z", guess_response: true)
+        expect(them).to eq(Paper.new)
+        expect(ours).to eq(Scissors.new)
+
+        them, ours = Aoc2022::Day2.from_line("C Z", guess_response: true)
+        expect(them).to eq(Scissors.new)
+        expect(ours).to eq(Rock.new)
+      end
+    end
+  end
 end
