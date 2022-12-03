@@ -36,4 +36,11 @@ RSpec.describe Aoc2022::Day3 do
       expect(Day3.priority("Z")).to eq(52)
     end
   end
+
+  context "group_badge" do
+    it "finds the char that is in all three lines" do
+      badge = Day3.group_badge(%w[abc bzz yub])
+      expect(badge).to eq("b")
+    end
+  end
 end

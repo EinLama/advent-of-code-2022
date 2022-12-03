@@ -35,6 +35,13 @@ module Aoc2022
       end
     end
 
+    def group_badge(lines)
+      first, second, third = lines
+      first.split("").find do |c|
+        second.include?(c) && third.include?(c)
+      end
+    end
+
     def build_rucksacks(input)
       input.split("\n").map do |line|
         Rucksack.new(line)
@@ -54,7 +61,9 @@ module Aoc2022
     end
 
     def solve_part2(input)
-      input
+      input.split("\n").each_slice(3).map do |g|
+        priority(group_badge(g))
+      end.sum
     end
   end
 end
