@@ -22,5 +22,10 @@ RSpec.describe Aoc2022::Day4 do
       expect(Day4.overlap?(2..3, 4..5)).to be false
       expect(Day4.overlap?(2..6, 4..8)).to be false
     end
+
+    it "returns true on partial overap" do
+      expect(Day4.partial_overlap?(2..6, 4..8)).to be true
+      expect(Day4.partial_overlap?(2..4, 6..8)).to be false
+    end
   end
 end
