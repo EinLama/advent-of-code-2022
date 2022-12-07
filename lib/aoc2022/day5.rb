@@ -46,10 +46,15 @@ module Aoc2022
       [crates, instr]
     end
 
-    def apply_instruction!(crates, instruction)
-      instruction.amount.times do
-        c = crates[instruction.from - 1].pop
-        crates[instruction.to - 1].push(c)
+    def apply_instruction!(crates, instruction, all_at_once: false)
+      if all_at_once
+        c = crates[instruction.from - 1].pop(instruction.amount)
+        crates[instruction.to - 1].push(*c)
+      else
+        instruction.amount.times do
+          c = crates[instruction.from - 1].pop
+          crates[instruction.to - 1].push(c)
+        end
       end
 
       crates
@@ -73,6 +78,14 @@ module Aoc2022
       top_crates(crates)
     end
 
-    def solve_part2(input); end
+    def solve_part2(input)
+      crates, instr = parse_input(input)
+
+      instr.each do |i|
+        crates = apply_instruction!(crates, i, all_at_once: true)
+      end
+
+      top_crates(crates)
+    end
   end
 end

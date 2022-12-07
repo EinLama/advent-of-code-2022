@@ -49,6 +49,14 @@ RSpec.describe Aoc2022::Day5 do
       new_stack = Day5.apply_instruction!(crates, instruction)
       expect(new_stack).to eq([%w[Z N], %w[M], %w[P D C]])
     end
+
+    it "can move multiple crates at once" do
+      crates = [%w[Z N], %w[M C D], ["P"]]
+      instruction = Instruction.new(2, 3, 2)
+
+      new_stack = Day5.apply_instruction!(crates, instruction, all_at_once: true)
+      expect(new_stack).to eq([%w[Z N], %w[M], %w[P C D]])
+    end
   end
 
   context "top crates" do
