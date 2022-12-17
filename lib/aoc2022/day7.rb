@@ -60,7 +60,7 @@ module Aoc2022
     end
 
     class Sysz
-      attr_reader :current_dir
+      attr_reader :current_dir, :root_dir
 
       def exec!(instruction)
         cmd, args = instruction
@@ -84,6 +84,27 @@ module Aoc2022
         end
 
         dirs
+      end
+
+      def total_sys_size
+        @total_sys_size ||= @root_dir.size
+      end
+
+      def smallest_dir(directory = nil, smallest_size = nil)
+        directory ||= @root_dir
+        dirs = directory.dirs
+
+        dirs.each do |d|
+          dirsize = d.size
+          if total_sys_size - dirsize <= 40_000_000
+            smallest_size ||= dirsize
+            smallest_size = dirsize if smallest_size > dirsize
+          end
+
+          smallest_size = smallest_dir(d, smallest_size)
+        end
+
+        smallest_size
       end
 
       def to_s
@@ -191,6 +212,15 @@ module Aoc2022
       biggest_dirs.map(&:size).reject { |s| s > 100_000 }.sum
     end
 
-    def solve_part2(input); end
+    def solve_part2(input)
+      tokens = Tokenizer.new(input)
+
+      sys = Sysz.new
+      while (t = tokens.next_token)
+        sys.exec!(t)
+      end
+
+      sys.smallest_dir
+    end
   end
 end
