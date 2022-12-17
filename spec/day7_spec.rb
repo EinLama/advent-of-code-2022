@@ -163,21 +163,6 @@ RSpec.describe Aoc2022::Day7 do
       expect(file.size).to eq(232)
     end
 
-    it "finds all directories with a size of at most 10_0000" do
-      sys = Sysz.new
-      sys.exec!([:cd, "/"])
-      sys.exec!([:cd, "a"])
-      sys.exec!([:ls, [[:file, 12_000, "huge file"]]])
-      sys.exec!([:cd, ".."])
-      sys.exec!([:cd, "b"])
-      sys.exec!([:ls, [[:file, 800, "small file"], [:file, 100, "tiny file"]]])
-
-      big_dirs = sys.big_dirs
-
-      expect(big_dirs.size).to eq(1)
-      expect(big_dirs.first.size).to eq(900)
-    end
-
     it "can count files more than once in nested dirs" do
       sys = Sysz.new
       sys.exec!([:cd, "/"])
