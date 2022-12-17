@@ -12,3 +12,5 @@ gem "rspec", "~> 3.0"
 gem "rubocop", "~> 1.21"
 
 gem "debug", "~> 1.6"
+
+gem "colorize", "~> 0.8.1"
