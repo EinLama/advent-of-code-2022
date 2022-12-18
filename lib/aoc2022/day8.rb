@@ -23,6 +23,57 @@ module Aoc2022
         @map[y][x]
       end
 
+      def scenic_score(x, y)
+        tree = tree_at(x, y)
+
+        vd_left = []
+        (0...x).to_a.reverse.each do |c|
+          local_tree = tree_at(c, y)
+          vd_left << local_tree
+
+          break unless tree > local_tree
+        end
+
+        vd_right = []
+        ((x + 1)...width).each do |c|
+          local_tree = tree_at(c, y)
+          vd_right << local_tree
+
+          break unless tree > local_tree
+        end
+
+        vd_top = []
+        (0...y).to_a.reverse.each do |c|
+          local_tree = tree_at(x, c)
+          vd_top << local_tree
+
+          break unless tree > local_tree
+        end
+
+        vd_bot = []
+        ((y + 1)...height).each do |c|
+          local_tree = tree_at(x, c)
+          vd_bot << local_tree
+
+          break unless tree > local_tree
+        end
+
+        # puts "FOUND DISTANCES: #{vd_top}, #{vd_left}, #{vd_right}, #{vd_bot}"
+
+        vd_left.size * vd_right.size * vd_bot.size * vd_top.size
+      end
+
+      def best_scenic_spot
+        highest_score = 0
+        (1...(width - 1)).each do |x|
+          (1...(height - 1)).each do |y|
+            highest_score = [highest_score, scenic_score(x, y)].max
+          end
+        end
+
+        highest_score
+      end
+
       def count_visible_trees
         trees = 0
         (0...width).each do |x|
@@ -94,6 +145,10 @@ module Aoc2022
       world.count_visible_trees
     end
 
-    def solve_part2(input); end
+    def solve_part2(input)
+      world = World.new(input)
+
+      world.best_scenic_spot
+    end
   end
 end

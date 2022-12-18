@@ -4,6 +4,14 @@ Day8 = Aoc2022::Day8
 World = Aoc2022::Day8::World
 
 RSpec.describe Day8 do
+  trees = <<~TREE
+    30373
+    25512
+    65332
+    33549
+    35390
+  TREE
+
   context "world" do
     it "can pinpoint a tree" do
       w = World.new("123\n345")
@@ -21,15 +29,7 @@ RSpec.describe Day8 do
   end
 
   context "tree visibility" do
-    trees = <<~TREE
-      30373
-      25512
-      65332
-      33549
-      35390
-    TREE
-
-    before(:each) do
+    before :each do
       @world = World.new(trees)
     end
 
@@ -71,6 +71,17 @@ RSpec.describe Day8 do
       expect(@world.check_top(5, 1, 1)).to be true
       expect(@world.check_top(5, 2, 1)).to be true
       expect(@world.check_top(5, 1, 2)).to be false
+    end
+  end
+
+  context "scenic score" do
+    before :each do
+      @world = World.new(trees)
+    end
+
+    it "calculates the score" do
+      expect(@world.scenic_score(2, 1)).to eq(4)
+      expect(@world.scenic_score(2, 3)).to eq(8)
     end
   end
 end
