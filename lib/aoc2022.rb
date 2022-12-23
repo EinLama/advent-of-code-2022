@@ -2,15 +2,7 @@
 
 require "optparse"
 
-require_relative "aoc2022/version"
-require_relative "aoc2022/day1"
-require_relative "aoc2022/day2"
-require_relative "aoc2022/day3"
-require_relative "aoc2022/day4"
-require_relative "aoc2022/day5"
-require_relative "aoc2022/day6"
-require_relative "aoc2022/day7"
-require_relative "aoc2022/day8"
+Dir[File.join(__dir__, "aoc2022", "*.rb")].sort.each { |file| require file }
 
 module Aoc2022
   class Error < StandardError; end
