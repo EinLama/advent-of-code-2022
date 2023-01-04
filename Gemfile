@@ -14,3 +14,6 @@ gem "rubocop", "~> 1.21"
 gem "debug", "~> 1.6"
 
 gem "colorize", "~> 0.8.1"
+
+
+gem "ruby-graphviz", "~> 1.2"
